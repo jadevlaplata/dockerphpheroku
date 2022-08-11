@@ -3,6 +3,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 require 'vendor/autoload.php';
 
+
 function conectar_PostgreSQL( $usuario, $pass, $host, $bd )
     {
          $conexion = pg_connect( "user=".$usuario." ".
@@ -41,6 +42,8 @@ function listarPersonas( $conexion )
     
 
 $app = new \Slim\App;
+unset($app->getContainer()['errorHandler']);
+unset($app->getContainer()['phpErrorHandler']);
 $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
 	
 	$conexion=conectar_PostgreSQL("psklxpvetpqvgr","3d5faea81b3a280bfbd1e19dd9211c1da14fef7f6c090a3d09436a32232f6d14","ec2-54-225-234-165.compute-1.amazonaws.com","d54m5h8ikd7mld");
